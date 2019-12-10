@@ -1,6 +1,6 @@
 const express = require('express');
 
-const db = require('./data/dbConfig.js');
+const db = require('./data/db-config.js');
 
 const server = express();
 
@@ -12,14 +12,14 @@ server.use(express.json());
 // In Knex, the equivalent of SELECT * FROM users is:
 // db.select('*').from('users');
 server.get('/', (req, res) => {
-    // db('accounts')
-    // .then(accounts => {
-    //     console.log(accounts);
-        res.status(200).json({message: 'hi'});
-    // })
-    // .catch(err => {
-    //     res.status(500).json({message: 'Error retrieving accounts'});
-    // })
+    db('cars')
+    .then(cars => {
+        console.log(cars);
+        res.status(200).json(cars);
+    })
+    .catch(err => {
+        res.status(500).json({message: 'Error retrieving cars'});
+    })
 });
 
 // INSERT using Knex
